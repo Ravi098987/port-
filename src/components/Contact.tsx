@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send } from 'lucide-react';
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
@@ -16,14 +16,15 @@ export default function Contact() {
     try {
       setIsSubmitting(true);
       await emailjs.sendForm(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        import.meta.env.VITE_EMAILSJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILSJS_TEMPLATE_ID,
         formRef.current,
-        'YOUR_PUBLIC_KEY'
+        import.meta.env.VITE_EMAILSJS_PUBLIC_KEY
       );
       toast.success('Message sent successfully!');
       formRef.current.reset();
     } catch (error) {
+      console.error('EmailJS error:', error);
       toast.error('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -71,7 +72,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Email</p>
-                  <p className="text-gray-900 font-medium">ravinaramina@gmail.com</p>
+                  <p className="text-gray-900 font-medium">singhravi2248@gmail.com</p>
                 </div>
               </motion.div>
               
